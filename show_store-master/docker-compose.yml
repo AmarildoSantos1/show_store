@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  articles-db:
+    image: postgres
+    container_name: articles-db
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: "articles_api_development"
+      POSTGRES_USER: "shoe"
+      POSTGRES_PASSWORD: "store"
+    ports:
+      - "5432:5432"
+    networks:
+      - articles-api-network
+
+  articles-pgadmin:
+    image: dpage/pgadmin4
+    container_name: articles-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "shoe@articles.com"
+      PGADMIN_DEFAULT_PASSWORD: "store"
+    ports:
+      - "15432:80"
+    depends_on:
+      - articles-db
+    networks:
+      - articles-api-network
+
+  articles-api:
+    image: articles-api
+    container_name: articles-api
+    build: .
+    environment:
+      - DBHOST=articles-db
+      - DBUSER=shoe
+      - DBPASS=store
+    volumes:
+      - .:/articles-api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - articles-db
+    networks:
+      - articles-api-network
+
+networks:
+  articles-api-network:
+    driver: bridge
+
+volumes:
+  postgres:

@@ -1,30 +1,27 @@
+# Use a imagem oficial do Ruby com a versão desejada
 FROM ruby:2.7.6
 
-# Install the necessary libraries
-RUN apt-get update -qq && apt-get install -y postgresql-client
+# Atualize o sistema e instale as dependências necessárias
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
-# BUNDLE_FROZEN setting
-RUN bundle config --global frozen 1
+# Configure a pasta de trabalho no contêiner
+WORKDIR /app
 
-# Set working directory
-WORKDIR /articles-api
+# Copie o Gemfile e o Gemfile.lock para o contêiner
+COPY Gemfile Gemfile.lock ./
 
-# Copy and install the project gems
-COPY Gemfile /articles-api/Gemfile
-COPY Gemfile.lock /articles-api/Gemfile.lock
-RUN bundle install
+# Instale as gemas
+RUN gem install bundler && bundle install
 RUN bundle exec rails assets:precompile
 RUN rails active_storage:install
 RUN rails g rails_admin:install
-RUN rails db:migrate
+RUN rails db:migrate RAILS_ENV=development
 
-# Run entrypoint.sh to delete server.pid
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+# Copie o restante do código-fonte para o contêiner
+COPY . .
 
-# Listen on this specified network port
+# Exponha a porta em que a aplicação Rails será executada
 EXPOSE 3000
 
-# Run rails server
+# Comando padrão para iniciar a aplicação
 CMD ["rails", "server", "-b", "0.0.0.0"]

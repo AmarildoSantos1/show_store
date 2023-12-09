@@ -34,6 +34,8 @@ gem 'jwt'
 
 gem 'rails_admin', '2.0.0'
 
+gem 'rack-cors'
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 

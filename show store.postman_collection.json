@@ -1,0 +1,234 @@
+{
+	"info": {
+		"_postman_id": "f3b997d1-6792-46e5-9932-734752db887a",
+		"name": "show store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31075514"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "authenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"amarildo@teste.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/authenticate",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"amarilado@teste.com\",\n    \"password\": \"123456\",\n    \"password_confirmation\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Items",
+			"item": [
+				{
+					"name": "listar Items",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.yQlV2UdzFjsHwoISTWOR5JbBNJbtp6fmkeJWdnAvTCQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/items",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user_items (favoritos)",
+			"item": [
+				{
+					"name": "listar favoritos do usuário",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.yQlV2UdzFjsHwoISTWOR5JbBNJbtp6fmkeJWdnAvTCQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/user_items",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user_items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "favoritar um item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.yQlV2UdzFjsHwoISTWOR5JbBNJbtp6fmkeJWdnAvTCQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/user_items/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user_items",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "list orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.yQlV2UdzFjsHwoISTWOR5JbBNJbtp6fmkeJWdnAvTCQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/orders",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.yQlV2UdzFjsHwoISTWOR5JbBNJbtp6fmkeJWdnAvTCQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"paid\",\n    \"item_ids\": [1, 2]\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/orders",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

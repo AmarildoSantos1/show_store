@@ -5,11 +5,22 @@ class OrderController < ActionController::API
     orders = @current_user.orders
 
     order_list = orders.map do |order|
+      list_items = order.items.map do |item|
+        {
+          id: item.id,
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          quantity: item.quantity,
+          image_url: item.image_url
+        }
+      end
+      
       {
         order_id: order.id,
         status: order.status,
         created_at: order.created_at,
-        items: order.items
+        items: list_items
       }
     end
 

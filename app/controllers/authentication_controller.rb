@@ -12,7 +12,7 @@ class AuthenticationController < ApplicationController
   end
 
   def register
-    user = User.new(email: params[:email], password: params[:password])
+    user = User.new(email: params[:email], name: params[:username], password: params[:password])
 
     if user.save
       token = generate_token(user.id)

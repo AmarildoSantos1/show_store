@@ -11,10 +11,11 @@ class ItemController < ActionController::API
         description: item.description,
         price: item.price,
         quantity: item.quantity,
-        image_url: item.image_url
+        image_url: item.image_url || ''
       }
     end
-
+    puts items_list 
+    
     render json: items_list, status: :ok
   end
 
